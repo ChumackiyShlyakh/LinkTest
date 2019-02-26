@@ -1,0 +1,62 @@
+class ListRecursive { 
+  
+    static Node head; 
+  
+    static class Node { 
+  
+        int data; 
+        Node next; 
+  
+        Node(int d) { 
+            data = d; 
+            next = null; 
+        } 
+    } 
+  
+    // Recursive function to reverse a linked list.
+ 
+    Node reverseUtil(Node current, Node previous) { 
+  
+        /* If last node mark it head*/
+        if (current.next == null) { 
+            head = current; 
+  
+            /* Update next to prev node */
+            current.next = previous; 
+              
+            return head; 
+        } 
+  
+        /* Save current->next node for recursive call */
+        Node next1 = current.next; 
+  
+        /* and update next ..*/
+        current.next = previous; 
+  
+        reverseUtil(next1, current); 
+        return head; 
+    } 
+  
+    // prints content of list 
+    void printList(Node node) { 
+        while (node != null) { 
+            System.out.print(node.data + " "); 
+            node = node.next; 
+        } 
+    } 
+  
+    public static void main(String[] args) { 
+        ListRecursive list = new ListRecursive(); 
+        list.head = new Node(1); 
+        list.head.next = new Node(2); 
+        list.head.next.next = new Node(3);
+  
+        System.out.println("Original list "); 
+        list.printList(head); 
+        Node res = list.reverseUtil(head, null); 
+        System.out.println(""); 
+        System.out.println(""); 
+        System.out.println("Reversed list "); 
+        list.printList(res); 
+    } 
+}
